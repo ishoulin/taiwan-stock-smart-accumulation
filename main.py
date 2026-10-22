@@ -5,14 +5,14 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
-# 初始化 FinMind DataLoader
-fm = DataLoader()
-
-# 1. 載入 FinMind Token 認證
+# 1. 載入 FinMind Token 認證 (修正為標準全域登入)
 token = os.environ.get("FINMIND_TOKEN", "")
 if token:
-    fm.login(token=token)
+    FinMind.login(token=token)
     print("🔑 成功載入 FinMind API Token 認證！")
+
+# 初始化 FinMind DataLoader
+fm = DataLoader()
 
 def send_email_report(subject, body):
     """透過 SMTP 自動發送篩選結果至指定 Email"""
