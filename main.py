@@ -142,7 +142,7 @@ def main():
     
     # 建立郵件內文
     report_date = pd.Timestamp.now().strftime('%Y-%m-%d %H:%M')
-    subject = f"🎯 【台股黑馬獵人】大戶吸籌狙擊報告，近20日吸籌 >= 1.5%，佔總成交量 >= 15%，日均量 >= 500張。 - {report_date}"
+    subject = f"🎯 【台股大戶吸籌股】大戶吸籌狙擊報告，近20日吸籌 >= 1.5%，佔總成交量 >= 15%，日均量 >= 500張。 - {report_date}"
     
     if not result_df.empty:
         body = f"報告時間：{report_date}\n" \
