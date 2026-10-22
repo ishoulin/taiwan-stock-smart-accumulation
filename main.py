@@ -1,9 +1,12 @@
 import pandas as pd
-import FinMind.data.api as fm
+from FinMind.data import DataLoader
 import os
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+
+# 初始化 FinMind DataLoader
+fm = DataLoader()
 
 # 1. 載入 FinMind Token 認證
 token = os.environ.get("FINMIND_TOKEN", "")
@@ -40,6 +43,7 @@ def send_email_report(subject, body):
 def main():
     print("🚀 開始執行台股『千金預備軍』與『大戶吸籌』黑馬篩選機制...")
     
+    # 取得全市場股票基本資料
     stock_info = fm.taiwan_stock_info()
     if stock_info is None or stock_info.empty:
         print("⚠️ 無法取得 FinMind 股票基本資料！")
@@ -92,6 +96,7 @@ def main():
             continue
             
         try:
+            # 使用 FinMind DataLoader 取得歷史股價與三大法人買賣超
             df_price = fm.taiwan_stock_daily(stock_id=stock_id, start_date='2026-08-01')
             df_chips = fm.taiwan_stock_institutional_investors(stock_id=stock_id, start_date='2026-08-01')
             
