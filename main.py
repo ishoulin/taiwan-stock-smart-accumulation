@@ -4,6 +4,7 @@ import os
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+from email.header import Header
 
 fm = DataLoader()
 
@@ -31,7 +32,7 @@ def send_email_report(subject, body):
         msg = MIMEMultipart()
         msg['From'] = sender_email
         msg['To'] = receiver_email
-        msg['Subject'] = subject
+        msg['Subject'] = Header(subject, 'utf-8')
         
         msg.attach(MIMEText(body, 'plain', 'utf-8'))
         
